@@ -16,21 +16,36 @@
     const input = document.getElementById('input')
     const output = document.getElementById('output')
 
-    var store = []
+    var store = [] // Temporary array
 
-    const addTodo = function(){
-      var newData = store.push(input.value)
-      var result = JSON.stringify(store)
-      localStorage.data = result
+    // Function for add list into DOM
+    const addList = function(data){
       var e = document.createElement('li');
-      e.innerHTML = input.value;
+      e.innerHTML = data;
       output.appendChild(e)
     }
 
+    // Check if localStorage.data exist
+    if (localStorage.data){
+      var previousData = JSON.parse(localStorage.data)
+      store = previousData // Add previous data to store array
+      store.forEach(function(data){
+        addList(data);
+      })
+    }
+
+    // Function for add todo
+    const addTodo = function(){
+      var newData = store.push(input.value) // push data to store array
+      var result = JSON.stringify(store) // stringify store array
+      localStorage.data = result // Add list to localStorage
+      addList(input.value) // Add list to DOM
+    }
+
     const clearTodo = function(){
-      store = []
-      output.innerHTML = ""
-      localStorage.clear()
+      store = [] // Clear the store array
+      output.innerHTML = "" // Clear the list DOM
+      localStorage.clear() // Clear the localStorage
     }
   </script>
 </body>
