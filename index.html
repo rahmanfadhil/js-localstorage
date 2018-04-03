@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>localStorage</title>
+</head>
+<body>
+  <input type="text" placeholder="Add todo" id="input">
+  <input type="button" onclick="addTodo()" value="Add Todo"/>
+  <input type="button" onclick="clearTodo()" value="Clear Todo"/>
+  <ul id="output"></ul>
+
+  <script type="text/javascript">
+    const input = document.getElementById('input')
+    const output = document.getElementById('output')
+
+    var store = []
+
+    const addTodo = function(){
+      var newData = store.push(input.value)
+      var result = JSON.stringify(store)
+      localStorage.data = result
+      var e = document.createElement('li');
+      e.innerHTML = input.value;
+      output.appendChild(e)
+    }
+
+    const clearTodo = function(){
+      store = []
+      localStorage.clear()
+    }
+  </script>
+</body>
+</html>
