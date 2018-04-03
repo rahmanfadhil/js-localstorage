@@ -19,19 +19,20 @@
     var store = [] // Temporary array
 
     // Function for add list into DOM
-    const addList = function(data){
-      var e = document.createElement('li');
-      e.innerHTML = data;
-      output.appendChild(e)
+    const showList = function(){
+      output.innerHTML = "";
+      store.forEach((data, index) => {
+        var e = document.createElement('li');
+        e.id = index;
+        e.innerHTML = `<button onclick="deleteTodo(${index})">X</button> ${data}`;
+        output.appendChild(e)
+      })
     }
 
     // Check if localStorage.data exist
     if (localStorage.data){
-      var previousData = JSON.parse(localStorage.data)
-      store = previousData // Add previous data to store array
-      store.forEach(function(data){
-        addList(data);
-      })
+      store = JSON.parse(localStorage.data) // Add previous data to store array
+      showList()
     }
 
     // Function for add todo
@@ -39,7 +40,14 @@
       var newData = store.push(input.value) // push data to store array
       var result = JSON.stringify(store) // stringify store array
       localStorage.data = result // Add list to localStorage
-      addList(input.value) // Add list to DOM
+      showList() // Add list to DOM
+    }
+
+    // Function for delete todo
+    const deleteTodo = function(index){
+      store.splice(index, 1)
+      localStorage.data = JSON.stringify(store);
+      showList()
     }
 
     const clearTodo = function(){
