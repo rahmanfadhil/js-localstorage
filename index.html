@@ -39,14 +39,14 @@
     const addTodo = function(){
       store.push(input.value) // push data to store array
       localStorage.data = JSON.stringify(store) // Add list to localStorage
-      showList() // Add list to DOM
+      showList() // Show list
     }
 
     // Function for delete todo
     const deleteTodo = function(index){
-      store.splice(index, 1)
-      localStorage.data = JSON.stringify(store);
-      showList()
+      store.splice(index, 1) // Delete data from store
+      localStorage.data = JSON.stringify(store); // Add list to localStorage
+      showList() // Show list
     }
 
     const clearTodo = function(){
