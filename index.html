@@ -20,8 +20,8 @@
 
     // Function for add list into DOM
     const showList = function(){
-      output.innerHTML = "";
-      store.forEach((data, index) => {
+      output.innerHTML = ""; // Clear the output field
+      store.forEach((data, index) => { // Display every single data in store array
         var e = document.createElement('li');
         e.id = index;
         e.innerHTML = `<button onclick="deleteTodo(${index})">X</button> ${data}`;
@@ -32,7 +32,7 @@
     // Check if localStorage.data exist
     if (localStorage.data){
       store = JSON.parse(localStorage.data) // Add previous data to store array
-      showList()
+      showList() // Show list
     }
 
     // Function for add todo
