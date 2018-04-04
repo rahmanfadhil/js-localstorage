@@ -63,7 +63,7 @@
     }
 
     const editTodo = function(index){
-    let edit = prompt('Edit Text')
+      let edit = prompt('Edit Text')
       store[index] = edit
       localStorage.data = JSON.stringify(store);
       showList()
