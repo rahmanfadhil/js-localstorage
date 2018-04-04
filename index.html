@@ -8,13 +8,16 @@
 </head>
 <body>
   <input type="text" placeholder="Add todo" id="input">
-  <input type="button" onclick="addTodo()" value="Add Todo"/>
-  <input type="button" onclick="clearTodo()" value="Clear Todo"/>
+  <input type="button" onclick="addTodo()" value="+"/>
+  <input type="button" onclick="clearTodo()" value="-"/>
   <ul id="output"></ul>
+  <input type="text" placeholder="Search todo" id="search">
+  <input type="button" onclick="searchTodo()" value="Find"/>
 
   <script type="text/javascript">
     const input = document.getElementById('input')
     const output = document.getElementById('output')
+    const search = document.getElementById('search')
 
     var store = [] // Temporary array
 
@@ -24,7 +27,11 @@
       store.forEach((data, index) => { // Display every single data in store array
         var e = document.createElement('li');
         e.id = index;
-        e.innerHTML = `<button onclick="deleteTodo(${index})">X</button> ${data}`;
+        e.innerHTML = `
+          <button onclick="deleteTodo(${index})">X</button>
+          <button onclick="editTodo(${index})">edit</button>
+          ${data}
+        `;
         output.appendChild(e)
       })
     }
@@ -53,6 +60,19 @@
       store = [] // Clear the store array
       output.innerHTML = "" // Clear the list DOM
       localStorage.clear() // Clear the localStorage
+    }
+
+    const editTodo = function(index){
+    let edit = prompt('Edit Text')
+      store[index] = edit
+      localStorage.data = JSON.stringify(store);
+      showList()
+    }
+
+    const searchTodo = function(){
+      var text = search.value.toLowerCase()
+      let find = store.filter(word => word.toLowerCase().includes(text));
+      alert(find.join(', '))
     }
   </script>
 </body>
