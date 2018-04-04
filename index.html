@@ -37,7 +37,7 @@
 
     // Function for add todo
     const addTodo = function(){
-      var newData = store.push(input.value) // push data to store array
+      store.push(input.value) // push data to store array
       var result = JSON.stringify(store) // stringify store array
       localStorage.data = result // Add list to localStorage
       showList() // Add list to DOM
